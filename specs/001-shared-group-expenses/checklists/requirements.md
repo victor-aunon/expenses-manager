@@ -32,6 +32,6 @@
 ## Notes
 
 - Specification validated successfully with 0 defects.
-- All 5 clarifications codified, including Option B for pure in-memory operation via repository ports.
+- All 5 clarifications codified and synchronized with the technical plan (embedded SQLite storage with decoupled in-memory repository adapters).
 - All monetary requirements align with the project constitution regarding financial integrity, minor-unit representation, and conservation of shares.
-- Ready for `/speckit-plan`.
+- Ready for `/speckit-implement`.

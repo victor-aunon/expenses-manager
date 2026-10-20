@@ -16,7 +16,7 @@
 - Q: Should the application compute and display net settlement balances for each group member, or focus solely on recording and displaying individual expense splits? → A: Option A (Net balance summary: Compute each member's overall balance [total paid minus total owed share] displayed on the group details view, without automated debt simplification).
 - Q: When creating an expense, should category selection be restricted to a predefined list or allow custom free-text categories? → A: Option A (Predefined standard categories: Select from a fixed standard list [Food, Transportation, Housing, Utilities, Entertainment, Healthcare, Other]).
 - Q: When recording an expense, should the currency default to a standard system currency or require explicit selection each time? → A: Option A (Default to EUR with selector: Pre-select EUR by default, allowing the user to change to another ISO 4217 currency [e.g., USD, GBP]).
-- Q: Should the application persist expenses and groups across browser sessions via a LocalStorage adapter, or start in-memory only? → A: Option B (Pure in-memory only: State resets on every browser refresh or tab close; external persistence adapter is deferred to a future phase).
+- Q: Should the application persist expenses and groups across browser sessions via a LocalStorage adapter, or start in-memory only? → A: Option B (No browser LocalStorage; storage is managed server-side via an embedded SQLite database adapter, with swappable in-memory repository adapters for automated test isolation).
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -119,7 +119,7 @@ As a group member, I want to record an expense assigned to a group, designate wh
 - **FR-017**: System MUST compute and display a net balance summary for each group member (calculated as total amount paid upfront by the member minus total share owed by the member across all group expenses).
 - **FR-018**: System MUST enforce category selection strictly from the predefined standard list (Food, Transportation, Housing, Utilities, Entertainment, Healthcare, Other).
 - **FR-019**: System MUST initialize the currency input with EUR by default and support EUR, USD, and GBP ISO 4217 currencies.
-- **FR-020**: System MUST manage all state in-memory during the application session via repository ports and in-memory adapters, with persistent storage adapters explicitly deferred to future phases.
+- **FR-020**: System MUST persist expenses, groups, and members to an embedded SQLite database via decoupled repository adapters on the server, while retaining swappable in-memory repository adapters for automated test isolation.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -142,12 +142,12 @@ As a group member, I want to record an expense assigned to a group, designate wh
 - **SC-005**: 0% accidental expense deletions observed due to mandatory two-step confirmation prompts.
 - **SC-006**: 95% of users successfully locate and review per-member split breakdowns on their first attempt without instructions.
 - **SC-007**: Group member net balances update accurately in under 100 milliseconds whenever an expense is added, edited, or deleted.
-- **SC-008**: 100% of expense, group, and member operations execute deterministically in-memory with sub-5ms repository access latency and zero external storage dependencies.
+- **SC-008**: 100% of expense, group, and member operations execute deterministically via the SQLite repository adapter with sub-5ms local query latency and zero remote network dependencies.
 
 ## Assumptions
 
 - **Equal Sharing Default**: All members of a group share group expenses equally in this initial version. Custom variable weighting, percentage splits, and itemized sub-allocations are deferred to future enhancements.
 - **Currency Homogeneity per Expense**: All splits for a given shared expense inherit the currency of that expense. Cross-currency conversion during splitting is out of scope for v1.
 - **Supported Initial Currencies**: EUR is the system default currency, with USD and GBP selectable.
-- **Pure In-Memory Architecture**: All entities, state transitions, and use cases operate strictly in-memory via repository ports and in-memory adapters. State resets upon page reload or browser tab closure; persistent storage adapters (LocalStorage/API) are out of scope for v1.
+- **Persistence Architecture**: The application persists data to an embedded SQLite database (`data/expenses.db`) via repository port adapters on the server, while decoupled in-memory repository adapters are used for isolated automated test execution without database side effects.
 - **Single Payer Model**: Each shared expense is paid upfront by a single designated payer chosen from the group's members.

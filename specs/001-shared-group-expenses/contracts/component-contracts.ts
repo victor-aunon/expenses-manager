@@ -52,9 +52,16 @@ export interface ExpenseListProps {
   expenses: ExpenseItemView[];
   isLoading: boolean;
   onDeleteExpense: (id: string) => void;
-  onFilterChange: (filters: { groupId?: string; category?: string }) => void;
+  onFilterChange: (filters: {
+    groupId?: string;
+    category?: string;
+    startDate?: string;
+    endDate?: string;
+  }) => void;
   selectedGroupId?: string;
   selectedCategory?: string;
+  selectedStartDate?: string;
+  selectedEndDate?: string;
 }
 
 export interface ExpenseFormProps {
