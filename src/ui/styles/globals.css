@@ -1,0 +1,78 @@
+@import "./tokens.css";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+html, body {
+  min-height: 100vh;
+  background-color: var(--color-bg-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Numeric tabular formatting for financial clarity */
+.tabular-numbers, .currency-amount {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Utilitarian Form Elements */
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  border-radius: var(--radius-none);
+  box-shadow: none !important;
+}
+
+input, select, textarea {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  border: var(--border-width) solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: var(--border-width-bold) solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+button {
+  cursor: pointer;
+  border: var(--border-width) solid var(--color-border);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  transition: none;
+}
+
+button:hover {
+  background-color: var(--color-border);
+  color: var(--color-bg-surface);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Accessible outline */
+a:focus-visible, button:focus-visible {
+  outline: var(--border-width-bold) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Wide screen margin optimization (>1800px) */
+@media (min-width: 1800px) {
+  body {
+    padding-inline: 5rem;
+  }
+}

@@ -1,0 +1,26 @@
+:root {
+  /* Utilitarian Design System Tokens (Taupe Palette) */
+  --color-bg-canvas: #e8e5e0;       /* taupe-200: Base canvas background */
+  --color-bg-surface: #f2f0ec;      /* taupe-100: Card/Surface background */
+  --color-bg-subtle: #dedad4;       /* taupe-300: Table header / subtle elements */
+  --color-border: #443e39;          /* taupe-800: Crisp structural borders */
+  --color-border-subtle: #797169;   /* taupe-600: Secondary borders */
+  --color-text-primary: #191715;    /* taupe-950: High-contrast primary text */
+  --color-text-muted: #5c544d;      /* taupe-700: Secondary readable text */
+  
+  /* Utilitarian Status Signals */
+  --color-credit: #215938;          /* Utilitarian forest green */
+  --color-credit-bg: #dceddf;
+  --color-debt: #802319;            /* Utilitarian brick red */
+  --color-debt-bg: #fae4e1;
+  --color-focus: #191715;
+
+  /* Typography */
+  --font-mono: ui-monospace, "SF Mono", Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Consolas, monospace;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+  /* Structural Geometry */
+  --border-width: 1px;
+  --border-width-bold: 2px;
+  --radius-none: 0px;
+}
